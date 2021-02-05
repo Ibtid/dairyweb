@@ -4,6 +4,7 @@ import ProductsPage from './User/Pages/Products/ProductsPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import StoreControl from './Admin/Pages/StoreControl/StoreControl';
 import Cart from './User/Pages/Cart/Cart';
+import Auth from './User/Pages/Auth/Auth';
 
 function App() {
   return (
@@ -16,9 +17,12 @@ function App() {
           <Navbar />
           <Cart />
         </Route>
-        <Route path='/'>
+        <Route path='/store'>
           <Navbar />
           <ProductsPage />
+        </Route>
+        <Route path='/'>
+          <Auth />
         </Route>
       </Switch>
     </Router>

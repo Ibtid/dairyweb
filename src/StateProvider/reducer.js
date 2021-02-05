@@ -88,6 +88,60 @@ const reducer = (state, action) => {
         cart: [],
         cartSummary: [],
       };
+    case 'Register_User':
+      let userIsUnique = true;
+      state.registeredUser.map((user) => {
+        if (user.username === action.registeredUser.username) {
+          alert('Username already in use');
+          userIsUnique = false;
+        }
+      });
+      state.registeredUser.map((user) => {
+        if (user.email === action.registeredUser.email) {
+          alert('Email already in use');
+          userIsUnique = false;
+        }
+      });
+      if (userIsUnique) {
+        return {
+          ...state,
+          registeredUser: [...state.registeredUser, action.registeredUser],
+          currentUser: [action.registeredUser],
+        };
+      } else {
+        return { ...state };
+      }
+
+    case 'RETRIEVE_USER':
+      return {
+        ...state,
+        registeredUser: action.registeredUser,
+      };
+
+    case 'LOGIN':
+      state.registeredUser.map((user) => {
+        if (
+          user.username === action.currentUser.username &&
+          user.password === action.currentUser.password
+        ) {
+          alert('logged in');
+
+          state = {
+            ...state,
+            currentUser: [
+              { id: user.custID, email: user.email, ...action.currentUser },
+            ],
+          };
+        }
+      });
+      if (state.currentUser.length === 0) alert('invalid username or password');
+      return { ...state };
+
+    case 'LOGOUT':
+      return {
+        ...state,
+        currentUser: [],
+      };
   }
 };
 
