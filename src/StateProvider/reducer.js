@@ -1,5 +1,6 @@
 import cheese from '../Resources/Images/cheese.jpg';
 import Mayonnaise from '../Resources/Images/Mayonnaise.jpg';
+import Yogurt from '../Resources/Images/yogurt.jpg';
 export const initialState = {
   products: [
     {
@@ -17,6 +18,14 @@ export const initialState = {
       image: Mayonnaise,
       description:
         'In a glass bowl, whisk together egg yolk and dry ingredients. Combine lemon juice and vinegar in a separate bowl then thoroughly whisk half into',
+    },
+    {
+      id: 3,
+      name: 'Yogurt',
+      price: 45,
+      image: Yogurt,
+      description:
+        'a fermented slightly acid often flavored semisolid food made of milk and milk solids to which cultures of two bacteria (Lactobacillus bulgaricus and Streptococcus thermophilus) have been added.',
     },
   ],
   cart: [],
@@ -54,6 +63,30 @@ const reducer = (state, action) => {
       return {
         ...state,
         cart: [...state.cart, action.product],
+      };
+    case 'REMOVE_PRODUCT_FROM_CART':
+      const cartIndex = state.cart.findIndex((cart) => cart.id === action.id);
+      let cartProducts = [...state.cart];
+      if (cartIndex >= 0) {
+        cartProducts.splice(cartIndex, 1);
+      } else {
+        console.warn('no products');
+      }
+      return {
+        ...state,
+        cart: cartProducts,
+      };
+    case 'KEEP_CART_SUMMARY':
+      return {
+        ...state,
+        cartSummary: action.cartSummary,
+      };
+
+    case 'EMPTY_CART':
+      return {
+        ...state,
+        cart: [],
+        cartSummary: [],
       };
   }
 };

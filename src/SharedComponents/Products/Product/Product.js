@@ -5,6 +5,7 @@ import './Product.css';
 
 const Product = (props) => {
   const addTocart = 'ADD TO CART';
+  const removeCart = 'Remove';
   const deleteProduct = 'Delete';
   const [state, dispatch] = useStateValue();
 
@@ -26,6 +27,43 @@ const Product = (props) => {
       },
     });
   };
+  const removeProductfromCart = () => {
+    dispatch({
+      type: 'REMOVE_PRODUCT_FROM_CART',
+      id: props.id,
+    });
+    console.log(props.description);
+  };
+
+  var productButton;
+
+  if (props.isAdmin) {
+    productButton = (
+      <div className='delete__button'>
+        <Button
+          message={deleteProduct}
+          isAdmin={props.isAdmin}
+          onClick={removeProduct}
+        />
+      </div>
+    );
+  } else if (props.isCart) {
+    productButton = (
+      <div className='add__cart__button'>
+        <Button
+          message={removeCart}
+          isAdmin={props.isAdmin}
+          onClick={removeProductfromCart}
+        />
+      </div>
+    );
+  } else {
+    productButton = (
+      <div className='add__cart__button'>
+        <Button message={addTocart} isAdmin={props.isAdmin} onClick={addCart} />
+      </div>
+    );
+  }
 
   return (
     <div className='Product'>
@@ -38,23 +76,7 @@ const Product = (props) => {
         <div className='product__imageContainer'>
           <img className='product__image' src={props.image} alt='product' />
         </div>
-        {props.isAdmin ? (
-          <div className='delete__button'>
-            <Button
-              message={deleteProduct}
-              isAdmin={props.isAdmin}
-              onClick={removeProduct}
-            />
-          </div>
-        ) : (
-          <div className='add__cart__button'>
-            <Button
-              message={addTocart}
-              isAdmin={props.isAdmin}
-              onClick={addCart}
-            />
-          </div>
-        )}
+        {productButton}
       </div>
     </div>
   );

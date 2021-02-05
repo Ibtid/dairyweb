@@ -4,6 +4,7 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import InboxIcon from '@material-ui/icons/Inbox';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useStateValue } from '../../../StateProvider/StateProvider';
+import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 
@@ -23,10 +24,10 @@ const Navbar = () => {
         <InboxIcon />
         Orders
       </div>
-      <div className='navbar__buttons'>
+      <Link to='/cart' className='navbar__buttons'>
         <ShoppingBasketIcon />
-        Cart {state.cart.length}
-      </div>
+        Cart: {state.cart.length}
+      </Link>
     </div>
   );
 };

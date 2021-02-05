@@ -21,7 +21,13 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding-left: 4rem;
+  padding-right: 4rem;
+  text-decoration: none;
+  color: #f1f1f1;
+}
+
+.navbar__Link {
+  text-decoration: none;
 }
 
 .navbar__buttons:hover {

@@ -3,6 +3,7 @@ import Navbar from './SharedComponents/UIComponent/Navbar/Navbar';
 import ProductsPage from './User/Pages/Products/ProductsPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import StoreControl from './Admin/Pages/StoreControl/StoreControl';
+import Cart from './User/Pages/Cart/Cart';
 
 function App() {
   return (
@@ -10,6 +11,10 @@ function App() {
       <Switch>
         <Route path='/admin/store'>
           <StoreControl />
+        </Route>
+        <Route path='/cart'>
+          <Navbar />
+          <Cart />
         </Route>
         <Route path='/'>
           <Navbar />
